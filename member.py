@@ -2,11 +2,22 @@ import material
 import math
 
 class member:
-    def __init__(self, length, force):
-        self.length = length
+    def __init__(self, length, force, compressiveMult):
+        
         self.force = force
+        
+        if self.force<0:
+            self.length = length*compressiveMult
+        else:
+            self.length = length    
+        
         self.dowel = 0.2
-        self.material = material.material(0.02, 0.00325)
+        
+        if self.force<0:
+            self.material = material.material(0.02, 0.00325*compressiveMult)
+        else:
+            self.material = material.material(0.02, 0.00325)    
+            
         self.crit = self.Crit()
         self.failed = self.failure()
         

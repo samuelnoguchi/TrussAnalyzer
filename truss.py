@@ -40,7 +40,7 @@ class truss:
         members = []
 
         for i in range(len(self.lengths)):
-            members.append(member.member(self.lengths[i], self.Q[i]))
+            members.append(member.member(self.lengths[i], self.Q[i],1))
         
         return members
     

@@ -13,7 +13,7 @@ def pV(maxLoad, totalLength):
     return -1*maxLoad / totalLength
     
 
-mesh_file = 'patch14'
+mesh_file = 'patch20'
 
 bound = {0: [1, 0],
          1: [1, 1]}
@@ -21,29 +21,29 @@ bound = {0: [1, 0],
 mesh = gmsh.Parse(mesh_file)
 
 ele = element.Data()
-for i in range(23):
+for i in range(25):
     ele.E[i] = 100.
     ele.A[i] = 10.
     ele.TYPE[i] = 'Truss'
     
-loadNode = 8
-
+loadNode = 3
 model = structure.Builder(mesh, ele, bound) 
 
 maxLoad = trussAnalyzer.findMaxLoad(mesh, model, ele, loadNode, 0, 10, -100)
 
 print(maxLoad)
 
-nodal_load = {loadNode: [0, maxLoad]}
+nodal_load = {loadNode: [0, -10]}
 
 U, Q  = displmethod.solver(mesh, model, ele, nodal_load) 
 
 trus= truss.truss(model.XYZ, model.CON, Q)
 
 print(trus.failed)
+print(trus.lengths)
 
 print(trus.totalLength)
-print('Broken member: ' + str(trus.findBroken()+1))
+#print('Broken member: ' + str(trus.findBroken()+1))
 print('Performance rating: ' + str(pV(maxLoad, trus.totalLength)))
 
 

@@ -13,7 +13,7 @@ def analyzeTruss(mesh_file, bound, loadNode):
     #Create Geometry
     
     ele = element.Data()
-    for i in range(15):
+    for i in range(23):
         ele.E[i] = 100.
         ele.A[i] = 10.
         ele.TYPE[i] = 'Truss'
@@ -25,7 +25,7 @@ def analyzeTruss(mesh_file, bound, loadNode):
     maxLoad = trialLoad
     XYZplot = model.XYZ
 
-    for design in range(5):
+    for design in range(10):
     
         for coord in range(len(model.XYZ)):  
             if coord > 1 and coord != loadNode:

@@ -11,7 +11,7 @@ import truss
 
 
 
-mesh_file = 'patch12'
+mesh_file = 'patch16'
 
 bound = {0: [1, 0],
          1: [1, 1]}
